@@ -1,0 +1,334 @@
+.chat-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 40px);
+  max-width: 980px;
+  margin: 20px auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+// ── Header ──────────────────────────────────────────────────
+.chat-header {
+  padding: 0 0 12px;
+  border-bottom: 1px solid #e0e0e0;
+  h2 {
+    margin: 0 0 2px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+}
+
+.chat-subtitle {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #888;
+}
+
+// ── Message list ────────────────────────────────────────────
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.message-row { display: flex; }
+.user-row     { justify-content: flex-end; }
+.assistant-row { justify-content: flex-start; }
+
+// ── User bubble ─────────────────────────────────────────────
+.bubble {
+  padding: 10px 16px;
+  border-radius: 18px;
+  max-width: 70%;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.user-bubble {
+  background: #1a73e8;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+// ── Assistant card ──────────────────────────────────────────
+.assistant-card {
+  background: #fff;
+  border: 1px solid #e4e4e7;
+  border-radius: 14px;
+  border-top-left-radius: 4px;
+  padding: 18px 22px;
+  max-width: 92%;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+
+.card-header-row { margin-bottom: 10px; }
+
+.source-badge {
+  display: inline-block;
+  padding: 3px 11px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+
+  &.badge-db        { background: #e8f0fe; color: #1a73e8; }
+  &.badge-web       { background: #fce8e6; color: #c5221f; }
+  &.badge-mixed     { background: #e6f4ea; color: #137333; }
+  &.badge-knowledge { background: #fef7e0; color: #b06000; }
+}
+
+.insights-text {
+  color: #202124;
+  margin-bottom: 4px;
+  white-space: pre-wrap;
+}
+
+// ── Charts ──────────────────────────────────────────────────
+.chart-block  { margin-top: 18px; }
+
+.chart-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #444;
+  margin: 0 0 8px;
+}
+
+.canvas-wrapper { max-width: 600px; }
+
+.data-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.87rem;
+
+  th, td {
+    border: 1px solid #e0e0e0;
+    padding: 7px 12px;
+    text-align: left;
+  }
+  thead th {
+    background: #f6f8fc;
+    font-weight: 600;
+    color: #444;
+  }
+  tbody tr:nth-child(even) { background: #fafafa; }
+}
+
+// ── References section ──────────────────────────────────────
+.references-section {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #ebebeb;
+}
+
+.references-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.ref-group-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #aaa;
+  margin: 10px 0 6px;
+}
+
+// Web reference cards — horizontal scroll grid
+.ref-cards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ref-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 12px 14px;
+  text-decoration: none;
+  transition: box-shadow 0.15s, transform 0.1s;
+  width: 220px;
+  min-height: 90px;
+  box-sizing: border-box;
+
+  &--web {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    color: inherit;
+
+    &:hover {
+      box-shadow: 0 3px 10px rgba(0,0,0,.10);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+.ref-card-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.ref-favicon {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.ref-domain {
+  font-size: 0.72rem;
+  color: #1a73e8;
+  font-weight: 500;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ref-ext-icon {
+  font-size: 0.75rem;
+  color: #aaa;
+  flex-shrink: 0;
+}
+
+.ref-card-title {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #202124;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ref-snippet {
+  font-size: 0.78rem;
+  color: #666;
+  line-height: 1.4;
+  margin-top: 5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Internal (database / document) reference list
+.ref-internal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ref-internal-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #f6f8fc;
+  border: 1px solid #e8ecf4;
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.ref-internal-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.ref-internal-body { flex: 1; }
+
+.ref-internal-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #3c4043;
+  margin-bottom: 2px;
+}
+
+// ── Loading dots ────────────────────────────────────────────
+.loading-card {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 22px;
+  color: #666;
+  font-style: italic;
+}
+
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #1a73e8;
+  animation: bounce 1.2s infinite;
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.4s; }
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  40%           { transform: translateY(-6px); }
+}
+
+.loading-text { margin-left: 4px; font-size: 0.9rem; }
+
+// ── Error banner ────────────────────────────────────────────
+.error-banner {
+  background: #fce8e6;
+  color: #c5221f;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+}
+
+// ── Input row ───────────────────────────────────────────────
+.chat-input-row {
+  display: flex;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 11px 18px;
+  border: 1px solid #ccc;
+  border-radius: 26px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+
+  &:focus   { border-color: #1a73e8; }
+  &:disabled { background: #f5f5f5; }
+}
+
+.send-btn {
+  padding: 11px 26px;
+  background: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 26px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover:not(:disabled) { background: #1557b0; }
+  &:disabled             { background: #ccc; cursor: not-allowed; }
+}

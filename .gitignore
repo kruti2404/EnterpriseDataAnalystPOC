@@ -1,3 +1,39 @@
+# .NET
 bin/
 obj/
+
+# Angular
 node_modules/
+dist/
+/tmp
+/out-tsc
+/bazel-out
+
+# Angular Cache
+**/.angular/
+.sass-cache/
+/coverage
+/typings
+
+# VS & IDEs
+.vs/
+.vscode/
+.history/*
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Logs
+npm-debug.log
+yarn-error.log
+/connect.lock
+/libpeerconnection.log
+testem.log
+
+# OS Files
+.DS_Store
+Thumbs.db

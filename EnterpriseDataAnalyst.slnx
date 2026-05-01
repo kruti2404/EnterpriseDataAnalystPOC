@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="EnterpriseDataAnalyst.API/EnterpriseDataAnalyst.API.csproj" />
+  <Project Path="EnterpriseDataAnalyst.Application/EnterpriseDataAnalyst.Application.csproj" />
+  <Project Path="EnterpriseDataAnalyst.Domain/EnterpriseDataAnalyst.Domain.csproj" />
+  <Project Path="EnterpriseDataAnalyst.Infrastructure/EnterpriseDataAnalyst.Infrastructure.csproj" />
+</Solution>

@@ -1,0 +1,26 @@
+Id,Name,Category,UnitPrice,StockQty
+1,Widget A,Hardware,618.12,855
+2,Widget B,Hardware,731.69,668
+3,Gadget X,Hardware,760.89,647
+4,Laptop Pro,Electronics,769.07,701
+5,Monitor 24in,Electronics,1091.79,259
+6,Keyboard Mech,Hardware,456.45,1525
+7,Mouse Wireless,Hardware,427.2,1327
+8,Desk Oak,Furniture,491.37,1578
+9,Chair Ergonomic,Furniture,269.82,2000
+10,Printer Laser,Furniture,687.95,691
+11,Software CRM,Software,815.39,1322
+12,Software ERP,Software,808.75,870
+13,USB Drive 64GB,Electronics,920.73,429
+14,HDMI Cable,Office Supplies,98.47,1922
+15,Router WiFi6,Software,1483.27,50
+16,Server Rack,Software,873.77,631
+17,Notebook Premium,Office Supplies,161.36,1731
+18,Pen Set,Office Supplies,227.29,2000
+19,Stapler Heavy,Office Supplies,90.92,2000
+20,File Cabinet,Furniture,216.18,1926
+21,Webcam HD,Electronics,920.67,676
+22,Headset NoiseCancel,Software,1304.74,620
+23,PowerBank 20K,Electronics,692.32,749
+24,Cable Ethernet,Office Supplies,176.16,1567
+25,Shredder CrossCut,Furniture,175.97,1772

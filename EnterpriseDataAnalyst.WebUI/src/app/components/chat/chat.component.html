@@ -1,0 +1,142 @@
+<div class="chat-wrapper">
+  <div class="chat-header">
+    <h2>AI Data Analyst</h2>
+    <p class="chat-subtitle">Ask questions about your sales data or any business topic</p>
+  </div>
+
+  <div class="chat-messages">
+    <ng-container *ngFor="let msg of messages; let i = index">
+
+      <!-- ── User bubble ── -->
+      <div *ngIf="msg.role === 'user'" class="message-row user-row">
+        <div class="bubble user-bubble">{{ msg.text }}</div>
+      </div>
+
+      <!-- ── Assistant response card ── -->
+      <div *ngIf="msg.role === 'assistant'" class="message-row assistant-row">
+        <div class="assistant-card">
+
+          <!-- Header row: badge + timestamp placeholder -->
+          <div class="card-header-row">
+            <span *ngIf="msg.response?.dataSource"
+                  class="source-badge"
+                  [ngClass]="dataSourceClass(msg.response!.dataSource)">
+              {{ dataSourceLabel(msg.response!.dataSource) }}
+            </span>
+          </div>
+
+          <!-- Insights text -->
+          <div class="insights-text">{{ msg.response?.insights }}</div>
+
+          <!-- Charts -->
+          <ng-container *ngIf="msg.response?.charts && msg.response!.charts.length > 0">
+            <div *ngFor="let chart of msg.response!.charts; let ci = index" class="chart-block">
+              <h4 *ngIf="chart.title" class="chart-title">{{ chart.title }}</h4>
+
+              <div *ngIf="chart.chartType === 'table'; else canvasTpl">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Label</th>
+                      <th *ngFor="let s of chart.series">{{ s.name }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let d of chart.series[0]?.data; let ri = index">
+                      <td>{{ d.label }}</td>
+                      <td *ngFor="let s of chart.series">{{ s.data[ri]?.value | number:'1.0-0' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <ng-template #canvasTpl>
+                <div class="canvas-wrapper">
+                  <canvas [id]="'chart-' + i + '-' + ci" #chartCanvas></canvas>
+                </div>
+              </ng-template>
+            </div>
+          </ng-container>
+
+          <!-- ── References / Source links ── -->
+          <ng-container *ngIf="hasSourceLinks(msg.response)">
+            <div class="references-section">
+              <div class="references-title">References</div>
+
+              <!-- Web sources (clickable cards) -->
+              <ng-container *ngIf="webLinks(msg.response).length > 0">
+                <div class="ref-group-label">Web</div>
+                <div class="ref-cards-grid">
+                  <a *ngFor="let link of webLinks(msg.response)"
+                     [href]="link.url"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     class="ref-card ref-card--web"
+                     [title]="link.snippet">
+                    <div class="ref-card-top">
+                      <img class="ref-favicon"
+                           [src]="getFavicon(link.url)"
+                           [alt]="getDomain(link.url)"
+                           onerror="this.style.display='none'" />
+                      <span class="ref-domain">{{ getDomain(link.url) }}</span>
+                      <span class="ref-ext-icon">&#8599;</span>
+                    </div>
+                    <div class="ref-card-title">{{ link.title }}</div>
+                    <div *ngIf="link.snippet" class="ref-snippet">{{ link.snippet }}</div>
+                  </a>
+                </div>
+              </ng-container>
+
+              <!-- Internal sources (non-clickable info cards) -->
+              <ng-container *ngIf="internalLinks(msg.response).length > 0">
+                <div class="ref-group-label">Internal</div>
+                <div class="ref-internal-list">
+                  <div *ngFor="let link of internalLinks(msg.response)" class="ref-internal-item">
+                    <span class="ref-internal-icon">
+                      <ng-container *ngIf="link.type === 'database'">&#128451;</ng-container>
+                      <ng-container *ngIf="link.type === 'document'">&#128196;</ng-container>
+                    </span>
+                    <div class="ref-internal-body">
+                      <div class="ref-internal-title">{{ link.title }}</div>
+                      <div *ngIf="link.snippet" class="ref-snippet">{{ link.snippet }}</div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+
+            </div>
+          </ng-container>
+          <!-- end references -->
+
+        </div>
+      </div>
+
+    </ng-container>
+
+    <!-- Loading indicator -->
+    <div *ngIf="isLoading" class="message-row assistant-row">
+      <div class="assistant-card loading-card">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="loading-text">Analyzing with AI agents...</span>
+      </div>
+    </div>
+
+    <div *ngIf="error" class="error-banner">{{ error }}</div>
+
+    <div #messagesEnd></div>
+  </div>
+
+  <div class="chat-input-row">
+    <input
+      type="text"
+      class="chat-input"
+      [(ngModel)]="question"
+      (keyup.enter)="askQuestion()"
+      placeholder="Ask a question about your sales data or any business topic..."
+      [disabled]="isLoading"
+    />
+    <button class="send-btn" (click)="askQuestion()" [disabled]="isLoading || !question.trim()">
+      {{ isLoading ? '...' : 'Ask' }}
+    </button>
+  </div>
+</div>
